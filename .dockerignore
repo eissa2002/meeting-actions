@@ -1,0 +1,15 @@
+# Any .env file or copy (.env, .env.txt, .env.local, ...) may hold real keys.
+.env*
+!.env.example
+.git/
+.venv/
+tests/
+eval/
+specs/
+.specify/
+.claude/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+*.egg-info/

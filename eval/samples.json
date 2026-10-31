@@ -1,0 +1,106 @@
+[
+  {
+    "id": "single-item",
+    "notes": "Weekly sync. Priya will send the updated budget report by Friday.",
+    "expected": [
+      {"task": "send the updated budget report", "owner": "Priya", "due_date": "Friday"}
+    ]
+  },
+  {
+    "id": "several-in-order",
+    "notes": "Launch planning.\n- Marco to draft the press release by March 3.\n- Lena will book the venue for the launch event by next week.\n- Tomas to confirm the catering order by Thursday.",
+    "expected": [
+      {"task": "draft the press release", "owner": "Marco", "due_date": "March 3"},
+      {"task": "book the venue for the launch event", "owner": "Lena", "due_date": "next week"},
+      {"task": "confirm the catering order", "owner": "Tomas", "due_date": "Thursday"}
+    ]
+  },
+  {
+    "id": "missing-owner",
+    "notes": "We agreed someone needs to update the onboarding wiki page before the new hires start on the 15th.",
+    "expected": [
+      {"task": "update the onboarding wiki page", "owner": null, "due_date": "the 15th"}
+    ]
+  },
+  {
+    "id": "missing-due-date",
+    "notes": "Design review went well. Aiko will collect feedback from the support team.",
+    "expected": [
+      {"task": "collect feedback from the support team", "owner": "Aiko", "due_date": null}
+    ]
+  },
+  {
+    "id": "two-owners",
+    "notes": "Ravi and Sofia will both review the vendor contract by end of month.",
+    "expected": [
+      {"task": "review the vendor contract", "owner": "Ravi", "due_date": "end of month"},
+      {"task": "review the vendor contract", "owner": "Sofia", "due_date": "end of month"}
+    ]
+  },
+  {
+    "id": "relative-due-date",
+    "notes": "Quick standup. Jonas said he'd fix the login timeout bug by next Tuesday.",
+    "expected": [
+      {"task": "fix the login timeout bug", "owner": "Jonas", "due_date": "next Tuesday"}
+    ]
+  },
+  {
+    "id": "no-items-status",
+    "notes": "Status update only. Revenue for Q3 was flat compared to Q2. The team discussed market trends and agreed the numbers were in line with expectations.",
+    "expected": []
+  },
+  {
+    "id": "no-items-retro",
+    "notes": "Retrospective. People felt the sprint went smoothly. Communication between design and engineering improved. No concerns were raised.",
+    "expected": []
+  },
+  {
+    "id": "no-items-announcement",
+    "notes": "All-hands. The CEO shared the company's annual results and thanked everyone for their work. Questions were answered at the end.",
+    "expected": []
+  },
+  {
+    "id": "distractor",
+    "notes": "Pricing chat. We could maybe look at pricing someday, but nothing is planned. Elif will share last year's pricing deck by Wednesday.",
+    "expected": [
+      {"task": "share last year's pricing deck", "owner": "Elif", "due_date": "Wednesday"}
+    ]
+  },
+  {
+    "id": "non-english",
+    "notes": "Reunión de equipo. Carmen enviará el informe de ventas el lunes.",
+    "expected": [
+      {"task": "enviar el informe de ventas", "owner": "Carmen", "due_date": "el lunes"}
+    ]
+  },
+  {
+    "id": "mixed-owned-and-unowned",
+    "notes": "Ops meeting. Nadia will rotate the staging certificates by Friday. The backup script also needs to be tested at some point.",
+    "expected": [
+      {"task": "rotate the staging certificates", "owner": "Nadia", "due_date": "Friday"},
+      {"task": "test the backup script", "owner": null, "due_date": null}
+    ]
+  },
+  {
+    "id": "explicit-date",
+    "notes": "Budget review. Omar must submit the final headcount plan by 2026-11-15.",
+    "expected": [
+      {"task": "submit the final headcount plan", "owner": "Omar", "due_date": "2026-11-15"}
+    ]
+  },
+  {
+    "id": "same-owner-two-tasks",
+    "notes": "Hiring sync. Grace will schedule the second-round interviews this week and send offer letters by Monday.",
+    "expected": [
+      {"task": "schedule the second-round interviews", "owner": "Grace", "due_date": "this week"},
+      {"task": "send offer letters", "owner": "Grace", "due_date": "Monday"}
+    ]
+  },
+  {
+    "id": "long-discussion-one-item",
+    "notes": "Architecture discussion. The team compared three caching approaches and debated the trade-offs between consistency and latency at length. Most people preferred the write-through option, though some worried about cost. In the end, Felix agreed to write up a short comparison document by the end of the sprint.",
+    "expected": [
+      {"task": "write up a short comparison document", "owner": "Felix", "due_date": "the end of the sprint"}
+    ]
+  }
+]

@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Meeting Actions API
+  version: 1.0.0
+  description: Extract action items from meeting notes. Notes are not stored.
+paths:
+  /v1/action-items:
+    post:
+      summary: Extract action items from meeting notes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtractRequest"
+            example:
+              notes: "Alice will send the budget report by Friday. Bob to book the venue."
+      responses:
+        "200":
+          description: Action items found (possibly none)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExtractResponse"
+              example:
+                action_items:
+                  - task: send the budget report
+                    owner: Alice
+                    due_date: Friday
+                  - task: book the venue
+                    owner: Bob
+                    due_date: null
+        "400":
+          description: Empty, too long, or malformed input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                empty:
+                  value:
+                    error: { code: empty_notes, message: "Notes must not be empty." }
+                tooLong:
+                  value:
+                    error:
+                      code: notes_too_long
+                      message: "Notes must be at most 20,000 characters; received 20,001."
+                invalid:
+                  value:
+                    error:
+                      code: invalid_request
+                      message: "Request body must be JSON with a 'notes' string field."
+        "502":
+          description: Extraction failed or LLM output did not match the schema
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error:
+                  code: extraction_failed
+                  message: "Could not extract action items. Please try again."
+  /health:
+    get:
+      summary: Liveness check
+      responses:
+        "200":
+          description: Service is running
+          content:
+            application/json:
+              example: { status: ok }
+components:
+  schemas:
+    ExtractRequest:
+      type: object
+      required: [notes]
+      properties:
+        notes:
+          type: string
+          description: Meeting notes; 1–20,000 characters after trimming whitespace.
+    ActionItem:
+      type: object
+      required: [task, owner, due_date]
+      properties:
+        task: { type: string, minLength: 1 }
+        owner: { type: [string, "null"], description: Name as written; null if not specified. }
+        due_date: { type: [string, "null"], description: Date as written; null if not specified. }
+    ExtractResponse:
+      type: object
+      required: [action_items]
+      properties:
+        action_items:
+          type: array
+          items: { $ref: "#/components/schemas/ActionItem" }
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum: [empty_notes, notes_too_long, invalid_request, extraction_failed]
+            message: { type: string }
